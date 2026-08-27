@@ -3,72 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RATHERMTA.HU</title>
+    <title>RATHERMTA.HU — A Jövő RolePlay Élménye</title>
     <style>
+        /* ==========================================================================
+           1. ALAPBEÁLLÍTÁSOK ÉS VÁLTOZÓK
+           ========================================================================== */
+        :root {
+            --bg-primary: #07090e;
+            --bg-secondary: #0b0f19;
+            --card-bg: #111827;
+            --card-hover: #1f293d;
+            --accent-cyan: #38bdf8;
+            --accent-blue: #0284c7;
+            --accent-purple: #a855f7;
+            --accent-green: #4ade80;
+            --accent-gold: #f59e0b;
+            --text-main: #ffffff;
+            --text-muted: #9ca3af;
+            --border-color: rgba(255, 255, 255, 0.06);
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
-        body {
-            background-color: #0b0f19;
-            color: #ffffff;
-            overflow-x: hidden;
+        html {
             scroll-behavior: smooth;
         }
 
-        /* Fix Navigációs sáv */
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Háttér díszítő elemek (Ambient Glow) */
+        .ambient-glow {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1000px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.07) 0%, rgba(11, 15, 25, 0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* ==========================================================================
+           2. FIX NAVIGÁCIÓS SÁV
+           ========================================================================== */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 40px;
-            background-color: #0b0f19;
+            padding: 18px 50px;
+            background-color: rgba(7, 9, 14, 0.85);
+            backdrop-filter: blur(12px);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             text-decoration: none;
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
+            color: var(--text-main);
+            font-weight: 800;
+            font-size: 20px;
+            letter-spacing: 1px;
         }
 
         .logo-container img {
-            height: 30px;
+            height: 35px;
             width: auto;
+            filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.4));
+        }
+
+        .logo-container span {
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         nav {
             display: flex;
-            gap: 20px;
+            gap: 25px;
+            align-items: center;
         }
 
         nav a {
             text-decoration: none;
-            color: #9ca3af;
+            color: var(--text-muted);
             font-size: 14px;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: var(--transition-smooth);
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-cyan);
+            transition: var(--transition-smooth);
+            border-radius: 2px;
         }
 
         nav a:hover {
-            color: #38bdf8;
+            color: var(--text-main);
         }
 
-        /* Szekciók */
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .nav-btn {
+            background-color: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: var(--accent-cyan) !important;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--accent-cyan);
+            color: #000000 !important;
+        }
+
+        .nav-btn::after {
+            display: none !important;
+        }
+
+        /* ==========================================================================
+           3. FŐOLDAL & STÁTUSZ KÁRTYA SZEKCIÓ
+           ========================================================================== */
         section {
-            padding: 90px 20px 40px 20px;
-            max-width: 950px;
+            padding: 110px 20px 60px 20px;
+            max-width: 1000px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
@@ -76,301 +162,579 @@
         }
 
         #fooldal {
-            min-height: 85vh;
+            min-height: 95vh;
             justify-content: center;
             text-align: center;
+            padding-top: 130px;
         }
 
-        .hero-logo {
-            height: 70px;
+        .status-card {
+            background: linear-gradient(145deg, #111827 0%, #0d1320 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px 30px 30px 30px;
+            width: 100%;
+            max-width: 540px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+            transition: var(--transition-smooth);
+        }
+
+        .status-card:hover {
+            border-color: rgba(56, 189, 248, 0.2);
+            box-shadow: 0 25px 55px rgba(0, 0, 0, 0.8), 0 0 25px rgba(56, 189, 248, 0.05);
+        }
+
+        .status-header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(74, 222, 128, 0.1);
+            color: var(--accent-green);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 18px;
+            border: 1px solid rgba(74, 222, 128, 0.2);
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-green);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-green);
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 15px var(--accent-green); }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+
+        .status-logo {
+            height: 65px;
             width: auto;
             margin-bottom: 15px;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
         }
 
-        #fooldal h1 {
-            font-size: 38px;
-            font-weight: 800;
-            letter-spacing: 2px;
-            color: #38bdf8;
-            margin-bottom: 10px;
+        .player-count {
+            font-size: 42px;
+            font-weight: 900;
+            color: var(--text-main);
+            letter-spacing: -1px;
+            margin-bottom: 2px;
         }
 
-        #fooldal p {
-            color: #9ca3af;
+        .player-label {
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Interaktív hullám grafikon háttér */
+        .wave-bg {
+            position: absolute;
+            bottom: 75px;
+            left: 0;
+            width: 100%;
+            height: 90px;
+            opacity: 0.25;
+            pointer-events: none;
+            background: linear-gradient(180deg, rgba(56, 189, 248, 0) 0%, rgba(56, 189, 248, 0.45) 100%);
+            clip-path: polygon(0% 70%, 12% 50%, 25% 75%, 40% 35%, 58% 60%, 72% 25%, 88% 45%, 100% 30%, 100% 100%, 0% 100%);
+        }
+
+        .status-links {
+            display: flex;
+            justify-content: space-around;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+
+        .status-link-item {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 12px;
+            font-weight: 500;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition-smooth);
+        }
+
+        .status-link-item:hover {
+            color: var(--accent-cyan);
+            transform: translateY(-2px);
+        }
+
+        .status-link-item svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+
+        .hero-desc {
+            color: var(--text-muted);
             font-size: 15px;
-            max-width: 550px;
-            margin-bottom: 25px;
+            max-width: 580px;
+            line-height: 1.6;
+            margin-bottom: 30px;
         }
 
         .btn {
-            background-color: #0284c7;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-cyan) 100%);
             color: white;
-            padding: 10px 24px;
-            border-radius: 6px;
+            padding: 12px 28px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            transition: background-color 0.3s;
+            gap: 10px;
+            transition: var(--transition-smooth);
             border: none;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 15px;
+            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
         }
 
         .btn:hover {
-            background-color: #0ea5e9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
         }
 
         .btn-discord {
-            background-color: #5865F2;
+            background: linear-gradient(135deg, #5865F2 0%, #7983f5 100%);
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
         }
 
         .btn-discord:hover {
-            background-color: #4752C4;
+            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.5);
         }
 
-        /* Kártyák */
+        /* ==========================================================================
+           4. ÁLTALÁNOS KÁRTYÁK ÉS SEGÍTSÉG SZEKCIÓ
+           ========================================================================== */
         .card {
-            background-color: #111827;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 30px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 35px;
             width: 100%;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            margin-bottom: 20px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+            margin-bottom: 25px;
+            transition: var(--transition-smooth);
         }
 
-        /* Segítség szekció belső elrendezése */
+        .card:hover {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .section-header h2 {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
         .help-content {
             display: flex;
-            gap: 30px;
+            gap: 40px;
             align-items: center;
         }
 
+        .help-image {
+            flex: 1;
+            width: 100%;
+            max-width: 380px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            border: 1px solid var(--border-color);
+        }
+
+        .help-text {
+            flex: 1.3;
+        }
+
         .help-text h2 {
-            font-size: 22px;
-            margin-bottom: 8px;
+            font-size: 24px;
+            margin-bottom: 12px;
         }
 
         .help-text p {
-            color: #9ca3af;
-            font-size: 13px;
-            margin-bottom: 10px;
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 15px;
         }
 
         .help-text ol {
             color: #d1d5db;
-            font-size: 13px;
-            padding-left: 18px;
-            margin-bottom: 15px;
+            font-size: 14px;
+            padding-left: 20px;
+            line-height: 1.7;
+            margin-bottom: 25px;
         }
 
-        .help-text ol li {
-            margin-bottom: 4px;
-        }
-
-        /* Rendszerkövetelmények dobozok */
+        /* Rendszerkövetelmények rács */
         .specs-container {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             width: 100%;
         }
 
         .specs-box {
-            background-color: #111827;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
-            padding: 20px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
             flex: 1;
+            transition: var(--transition-smooth);
+        }
+
+        .specs-box:hover {
+            border-color: rgba(56, 189, 248, 0.2);
+            transform: translateY(-3px);
         }
 
         .specs-box h3 {
             font-size: 16px;
-            margin-bottom: 10px;
-            color: #e5e7eb;
+            margin-bottom: 15px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .specs-box ul {
             list-style: none;
-            color: #9ca3af;
-            font-size: 12px;
+            color: var(--text-muted);
+            font-size: 13px;
+            line-height: 1.8;
         }
 
-        .specs-box ul li {
-            margin-bottom: 6px;
+        .specs-box ul li strong {
+            color: #d1d5db;
         }
 
-        /* Discord kártya */
+        /* ==========================================================================
+           5. STÁB SZEKCIÓ (EGYEDI, MODERN KÁRTYÁK)
+           ========================================================================== */
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            width: 100%;
+        }
+
+        .staff-box {
+            background: linear-gradient(145deg, var(--card-bg) 0%, #0d121f 100%);
+            border: 1px solid var(--border-color);
+            padding: 28px;
+            border-radius: 16px;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .staff-box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+        }
+
+        .staff-box.owner { border-top: 4px solid var(--accent-cyan); }
+        .staff-box.management { border-top: 4px solid var(--accent-gold); }
+        .staff-box.developer { border-top: 4px solid var(--accent-purple); }
+        .staff-box.admin { border-top: 4px solid var(--accent-green); }
+
+        .staff-box h3 {
+            font-size: 16px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+        }
+
+        .staff-box.owner h3 { color: var(--accent-cyan); }
+        .staff-box.management h3 { color: var(--accent-gold); }
+        .staff-box.developer h3 { color: var(--accent-purple); }
+        .staff-box.admin h3 { color: var(--accent-green); }
+
+        .staff-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .staff-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #e5e7eb;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            transition: var(--transition-smooth);
+        }
+
+        .staff-list li:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .staff-role {
+            color: var(--text-muted);
+            font-size: 11px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ==========================================================================
+           6. KÖZÖSSÉG & DISCORD SZEKCIÓ
+           ========================================================================== */
         .discord-card {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: linear-gradient(135deg, #111827 0%, #161f33 100%);
+            border: 1px solid rgba(88, 101, 242, 0.2);
         }
 
         .discord-text h2 {
-            font-size: 22px;
+            font-size: 24px;
             margin-bottom: 8px;
         }
 
         .discord-text p {
-            color: #9ca3af;
-            font-size: 13px;
-            margin-bottom: 12px;
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 18px;
         }
 
         .discord-features {
             list-style: none;
-            color: #4ade80;
+            color: var(--accent-green);
             font-size: 13px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
         }
 
-        .discord-features li {
-            margin-bottom: 4px;
-        }
-
-        /* Lábjegyzet */
+        /* ==========================================================================
+           7. LÁBJJEGYZET
+           ========================================================================== */
         footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 30px 50px;
+            border-top: 1px solid var(--border-color);
             color: #6b7280;
-            font-size: 12px;
-            max-width: 950px;
-            margin: 20px auto 0 auto;
+            font-size: 13px;
+            max-width: 1000px;
+            margin: 40px auto 0 auto;
         }
 
         .footer-logo {
             display: flex;
             align-items: center;
-            gap: 8px;
-            color: #9ca3af;
+            gap: 10px;
+            color: var(--text-muted);
+            font-weight: 600;
         }
 
         .footer-logo img {
-            height: 18px;
+            height: 20px;
             width: auto;
+        }
+
+        /* ==========================================================================
+           8. RESZPONZÍV BEÁLLÍTÁSOK
+           ========================================================================== */
+        @media (max-width: 768px) {
+            header { padding: 15px 20px; }
+            nav { display: none; /* Mobilos menü helye később */ }
+            .help-content { flex-direction: column; }
+            .specs-container { flex-direction: column; }
+            .staff-grid { grid-template-columns: 1fr; }
+            .discord-card { flex-direction: column; text-align: center; gap: 20px; }
+            footer { flex-direction: column; gap: 15px; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Navigációs sáv -->
+    <!-- Háttér hangulatfény -->
+    <div class="ambient-glow"></div>
+
+    <!-- Fix Navigációs sáv -->
     <header>
         <a href="#fooldal" class="logo-container">
-            <img src="logo.png" alt="Logo"> RATHERMTA.HU
+            <img src="logo.png" alt="Logo"> <span>RATHERMTA</span>
         </a>
         <nav>
-            <a href="ucp/index.html">UCP</a>
+            <a href="#fooldal">Főoldal</a>
             <a href="#segitseg">Segítség</a>
             <a href="#stab">Stáb</a>
             <a href="#kozosseg">Közösség</a>
-            <a href="szabalyzat/szerver.html">Szerver Szabályzat</a>
+            <a href="szabalyzat/szerver.html">Szabályzat</a>
+            <a href="ucp/index.html" class="nav-btn">UCP Vezérlő</a>
         </nav>
     </header>
 
-    <!-- 1. Főoldal Szekció -->
+    <!-- 1. Főoldal Szekció (Élő szerver státusz kártyával) -->
     <section id="fooldal">
-        <img src="logo.png" alt="Logo" class="hero-logo">
-        <h1>RATHERMTA</h1>
-        <p>Kezd el a saját RP Karaktered a RATHERMTA szerverén, és alakítsd úgy a karaktered - ahogyan szeretnéd!</p>
-        <a href="#segitseg" class="btn">▶ Csatlakozz most</a>
+        <div class="status-card">
+            <div class="status-header-badge">
+                <span class="live-dot"></span> Szerver Online &bull; v1.0 Release
+            </div>
+            <img src="logo.png" alt="Logo" class="status-logo">
+            <div class="player-count">189</div>
+            <div class="player-label">Aktív Online Játékos</div>
+            
+            <!-- Hullám grafikon háttér -->
+            <div class="wave-bg"></div>
+
+            <div class="status-links">
+                <a href="https://facebook.com" class="status-link-item" target="_blank">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12c0-5.523-4.477-10-10-10z"/></svg>
+                    Facebook
+                </a>
+                <a href="ucp/index.html" class="status-link-item">
+                    <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                    UCP Portál
+                </a>
+                <a href="#kozosseg" class="status-link-item">
+                    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0-2-.9-2-2V4c0-1.1-.9-2-2-2z"/></svg>
+                    Közösség
+                </a>
+            </div>
+        </div>
+
+        <p class="hero-desc">
+            Kezdd el a saját egyedi RolePlay karaktered építését a RATHERMTA szerverén, tapasztald meg a prémium fejlesztéseket, a professzionális közösséget és a korlátlan szabadságot!
+        </p>
+        <a href="#segitseg" class="btn">▶ Csatlakozz a szerverhez</a>
     </section>
 
     <!-- 2. Segítség Szekció -->
     <section id="segitseg">
         <div class="card">
             <div class="help-content">
-                <img src="monitor.png" alt="Monitor" style="flex: 1; width: 100%; max-width: 350px; height: auto; border-radius: 8px;">
+                <img src="monitor.png" alt="Monitor" class="help-image">
                 
-                <div class="help-text" style="flex: 1.2;">
-                    <h2>Csatlakozás a RATHERMTA szerverére</h2>
-                    <p>Légy részese Magyarország legújabb RolePlay közösségének!</p>
+                <div class="help-text">
+                    <h2>Csatlakozási Útmutató</h2>
+                    <p>Légy részese Magyarország legdinamikusabban fejlődő RolePlay közösségének néhány egyszerű lépésben:</p>
                     <ol>
-                        <li>Grand Theft Auto: San Andreas telepítése</li>
-                        <li>MTA:SA kliens letöltése</li>
-                        <li>MTA:SA kliens indítása</li>
-                        <li>RATHERMTA szócska begépelése</li>
+                        <li>Telepíts egy tiszta Grand Theft Auto: San Andreas játékot.</li>
+                        <li>Töltsd le és telepítsd az MTA:SA legfrissebb kliensét.</li>
+                        <li>Indítsd el a klienst, majd kattints a Gyorscsatlakozásra.</li>
+                        <li>Add meg a szerver nevét vagy IP címét: <strong>RATHERMTA</strong></li>
                     </ol>
-                    <a href="https://multitheftauto.com/" class="btn" target="_blank">📥 MTA:SA letöltése</a>
+                    <a href="https://multitheftauto.com/" class="btn" target="_blank">📥 MTA:SA Kliens Letöltése</a>
                 </div>
             </div>
         </div>
 
         <div class="specs-container">
             <div class="specs-box">
-                <h3>Minimum követelmény</h3>
+                <h3>🖥️ Minimum Követelmények</h3>
                 <ul>
-                    <li>• OS: Windows 10</li>
-                    <li>• CPU: Core 2 Quad / Phenom 9850</li>
-                    <li>• RAM: 6GB</li>
-                    <li>• GPU: NVIDIA 9800 GT / AMD HD 4870</li>
-                    <li>• Tárhely: 10GB</li>
+                    <li>• <strong>Operációs rendszer:</strong> Windows 10</li>
+                    <li>• <strong>Processzor:</strong> Core 2 Quad / Phenom 9850</li>
+                    <li>• <strong>Memória (RAM):</strong> 6 GB</li>
+                    <li>• <strong>Videokártya:</strong> NVIDIA 9800 GT / AMD HD 4870</li>
+                    <li>• <strong>Tárhely:</strong> 10 GB szabad hely</li>
                 </ul>
             </div>
             <div class="specs-box">
-                <h3>Ajánlott követelmény</h3>
+                <h3>⚡ Ajánlott Konfiguráció</h3>
                 <ul>
-                    <li>• OS: Windows 10/11</li>
-                    <li>• CPU: Core i5 3470 / FX-8350</li>
-                    <li>• RAM: 12GB</li>
-                    <li>• GPU: GTX 660 / HD 7870</li>
-                    <li>• Tárhely: 15GB (SSD)</li>
+                    <li>• <strong>Operációs rendszer:</strong> Windows 10 / 11</li>
+                    <li>• <strong>Processzor:</strong> Core i5 3470 / AMD FX-8350</li>
+                    <li>• <strong>Memória (RAM):</strong> 12 GB+</li>
+                    <li>• <strong>Videokártya:</strong> GTX 660 / HD 7870 vagy jobb</li>
+                    <li>• <strong>Tárhely:</strong> 15 GB (SSD ajánlott)</li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <!-- 3. Stáb Szekció - 2 oszlopos, szép elrendezés -->
+    <!-- 3. Stáb Szekció -->
     <section id="stab">
-        <div class="card">
-            <h2 style="font-size: 22px; margin-bottom: 8px; text-align: center;">A RATHERMTA Csapata</h2>
-            <p style="color: #9ca3af; font-size: 13px; text-align: center; margin-bottom: 25px;">Kikhez fordulhatsz baj vagy kérdés esetén?</p>
-            
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                
-                <!-- Tulajdonosok -->
-                <div style="background: #0f172a; padding: 20px; border-radius: 8px; border-top: 3px solid #38bdf8;">
-                    <h3 style="color: #38bdf8; font-size: 15px; margin-bottom: 12px;">👑 Tulajdonosok</h3>
-                    <ul style="list-style: none; color: #d1d5db; font-size: 13px; line-height: 1.6;">
-                        <li>N3th4x</li>
-                        <li>junior <span style="color: #9ca3af; font-size: 11px;">(Junior Tulajdonos)</span></li>
-                    </ul>
-                </div>
+        <div class="section-header">
+            <h2>A RATHERMTA Csapata</h2>
+            <p>Akik a háttérben dolgoznak a tökéletes játékélményért és az igazságos közösségért.</p>
+        </div>
+        
+        <div class="staff-grid">
+            <!-- Tulajdonosok -->
+            <div class="staff-box owner">
+                <h3>👑 Tulajdonosok</h3>
+                <ul class="staff-list">
+                    <li>N3th4x <span class="staff-role">Főtulajdonos</span></li>
+                    <li>junior <span class="staff-role">Junior Tulajdonos</span></li>
+                </ul>
+            </div>
 
-                <!-- Vezetőség -->
-                <div style="background: #0f172a; padding: 20px; border-radius: 8px; border-top: 3px solid #f59e0b;">
-                    <h3 style="color: #f59e0b; font-size: 15px; margin-bottom: 12px;">⭐ Vezetőség</h3>
-                    <ul style="list-style: none; color: #d1d5db; font-size: 13px; line-height: 1.6;">
-                        <li>bambi <span style="color: #9ca3af; font-size: 11px;">(Szuperadmin)</span></li>
-                        <li>Patesz <span style="color: #9ca3af; font-size: 11px;">(Szuperadmin)</span></li>
-                        <li>niko <span style="color: #9ca3af; font-size: 11px;">(Manager)</span></li>
-                    </ul>
-                </div>
+            <!-- Vezetőség -->
+            <div class="staff-box management">
+                <h3>⭐ Vezetőség</h3>
+                <ul class="staff-list">
+                    <li>bambi <span class="staff-role">Szuperadmin</span></li>
+                    <li>Patesz <span class="staff-role">Szuperadmin</span></li>
+                    <li>niko <span class="staff-role">Manager</span></li>
+                </ul>
+            </div>
 
-                <!-- Fejlesztők -->
-                <div style="background: #0f172a; padding: 20px; border-radius: 8px; border-top: 3px solid #a855f7;">
-                    <h3 style="color: #a855f7; font-size: 15px; margin-bottom: 12px;">💻 Fejlesztők</h3>
-                    <ul style="list-style: none; color: #d1d5db; font-size: 13px; line-height: 1.6;">
-                        <li>Elo</li>
-                        <li>kevin</li>
-                        <li>Brute</li>
-                    </ul>
-                </div>
+            <!-- Fejlesztők -->
+            <div class="staff-box developer">
+                <h3>💻 Fejlesztők</h3>
+                <ul class="staff-list">
+                    <li>Elo <span class="staff-role">Fejlesztő</span></li>
+                    <li>kevin <span class="staff-role">Fejlesztő</span></li>
+                    <li>Brute <span class="staff-role">Fejlesztő</span></li>
+                </ul>
+            </div>
 
-                <!-- Adminisztrátorok -->
-                <div style="background: #0f172a; padding: 20px; border-radius: 8px; border-top: 3px solid #4ade80;">
-                    <h3 style="color: #4ade80; font-size: 15px; margin-bottom: 12px;">🛡️ Adminisztrátorok</h3>
-                    <ul style="list-style: none; color: #d1d5db; font-size: 13px; line-height: 1.6;">
-                        <li>cash</li>
-                        <li>dark</li>
-                        <li>krisztiannn</li>
-                        <li>maestro_</li>
-                    </ul>
-                </div>
-
+            <!-- Adminisztrátorok -->
+            <div class="staff-box admin">
+                <h3>🛡️ Adminisztrátorok</h3>
+                <ul class="staff-list">
+                    <li>cash <span class="staff-role">Admin</span></li>
+                    <li>dark <span class="staff-role">Admin</span></li>
+                    <li>krisztiannn <span class="staff-role">Admin</span></li>
+                    <li>maestro_ <span class="staff-role">Admin</span></li>
+                </ul>
             </div>
         </div>
     </section>
@@ -379,15 +743,15 @@
     <section id="kozosseg">
         <div class="card discord-card">
             <div class="discord-text">
-                <h2>Csatlakozz Discord szerverünkre</h2>
-                <p>Légy részese a legaktívabb MTA közösségnek! Kérdezz, beszélgess másokkal.</p>
+                <h2>Légy tagja a Discord közösségünknek</h2>
+                <p>Ne maradj le a legfrissebb frissítésekről, pályázatokról és közösségi eseményekről!</p>
                 <ul class="discord-features">
-                    <li>✓ Közvetlen beszélgetés a vezetőséggel</li>
-                    <li>✓ Események és versenyek első kézből</li>
-                    <li>✓ Hibák és panaszok jelentése</li>
+                    <li>✓ Közvetlen kapcsolattartás a vezetőséggel</li>
+                    <li>✓ Exkluzív eventek, nyereményjátékok</li>
+                    <li>✓ Gyors ügyintézés és hibabejelentés</li>
                 </ul>
             </div>
-            <a href="https://discord.gg/7XKZvapgq" class="btn btn-discord" target="_blank">💬 Csatlakozás</a>
+            <a href="https://discord.gg/7XKZvapgq" class="btn btn-discord" target="_blank">💬 Csatlakozás Discordra</a>
         </div>
     </section>
 
@@ -396,7 +760,7 @@
         <div class="footer-logo">
             <img src="logo.png" alt="Logo"> RATHERMTA
         </div>
-        <div>A legmodernebb magyar RolePlay közösség © 2026</div>
+        <div>Minden jog fenntartva © 2026 &bull; A legmodernebb magyar RolePlay élmény</div>
     </footer>
 
 </body>
