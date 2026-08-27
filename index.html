@@ -19,12 +19,12 @@
             scroll-behavior: smooth;
         }
 
-        /* Navigáció */
+        /* Fix Navigációs sáv */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 50px;
+            padding: 15px 40px;
             background-color: #0b0f19;
             position: fixed;
             width: 100%;
@@ -40,23 +40,23 @@
             text-decoration: none;
             color: white;
             font-weight: bold;
-            font-size: 20px;
+            font-size: 18px;
         }
 
         .logo-container img {
-            height: 35px;
+            height: 30px;
             width: auto;
         }
 
         nav {
             display: flex;
-            gap: 25px;
+            gap: 20px;
         }
 
         nav a {
             text-decoration: none;
             color: #9ca3af;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
             transition: color 0.3s;
         }
@@ -65,46 +65,47 @@
             color: #38bdf8;
         }
 
-        /* Szekciók általános beállítása */
+        /* Szekciók - optimalizált távolságok */
         section {
-            min-height: 100vh;
+            padding: 90px 20px 40px 20px;
+            max-width: 950px;
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            padding: 100px 20px 50px 20px;
         }
 
-        /* 1. Szekció: Főoldal */
         #fooldal {
+            min-height: 85vh;
+            justify-content: center;
             text-align: center;
         }
 
         .hero-logo {
-            height: 90px;
+            height: 70px;
             width: auto;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         #fooldal h1 {
-            font-size: 42px;
+            font-size: 38px;
             font-weight: 800;
             letter-spacing: 2px;
             color: #38bdf8;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         #fooldal p {
             color: #9ca3af;
-            font-size: 16px;
-            max-width: 600px;
-            margin-bottom: 30px;
+            font-size: 15px;
+            max-width: 550px;
+            margin-bottom: 25px;
         }
 
         .btn {
             background-color: #0284c7;
             color: white;
-            padding: 12px 28px;
+            padding: 10px 24px;
             border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
@@ -114,6 +115,7 @@
             transition: background-color 0.3s;
             border: none;
             cursor: pointer;
+            font-size: 14px;
         }
 
         .btn:hover {
@@ -128,79 +130,78 @@
             background-color: #4752C4;
         }
 
-        /* Kártyák / Konténerek a 2. és 3. képszerű részekhez */
+        /* Kártyák */
         .card {
             background-color: #111827;
             border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 12px;
-            padding: 40px;
+            padding: 30px;
             width: 100%;
-            max-width: 900px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
-        /* 2. Szekció: Segítség */
+        /* Segítség szekció belső elrendezése */
         .help-content {
             display: flex;
-            gap: 40px;
+            gap: 30px;
             align-items: center;
-            margin-bottom: 30px;
         }
 
         .help-text h2 {
-            font-size: 24px;
-            margin-bottom: 10px;
+            font-size: 22px;
+            margin-bottom: 8px;
         }
 
         .help-text p {
             color: #9ca3af;
-            font-size: 14px;
-            margin-bottom: 15px;
+            font-size: 13px;
+            margin-bottom: 10px;
         }
 
         .help-text ol {
             color: #d1d5db;
-            font-size: 14px;
-            padding-left: 20px;
-            margin-bottom: 20px;
+            font-size: 13px;
+            padding-left: 18px;
+            margin-bottom: 15px;
         }
 
         .help-text ol li {
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
 
+        /* Rendszerkövetelmények dobozok */
         .specs-container {
             display: flex;
             gap: 20px;
             width: 100%;
-            max-width: 900px;
         }
 
         .specs-box {
             background-color: #111827;
             border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 12px;
-            padding: 25px;
+            padding: 20px;
             flex: 1;
         }
 
         .specs-box h3 {
-            font-size: 18px;
-            margin-bottom: 15px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #e5e7eb;
         }
 
         .specs-box ul {
             list-style: none;
             color: #9ca3af;
-            font-size: 13px;
+            font-size: 12px;
         }
 
         .specs-box ul li {
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
-        /* 3. Szekció: Közösség (Discord) */
+        /* Discord kártya */
         .discord-card {
             display: flex;
             justify-content: space-between;
@@ -208,24 +209,24 @@
         }
 
         .discord-text h2 {
-            font-size: 24px;
-            margin-bottom: 10px;
+            font-size: 22px;
+            margin-bottom: 8px;
         }
 
         .discord-text p {
             color: #9ca3af;
-            font-size: 14px;
-            margin-bottom: 15px;
+            font-size: 13px;
+            margin-bottom: 12px;
         }
 
         .discord-features {
             list-style: none;
             color: #4ade80;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .discord-features li {
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         /* Lábjegyzet */
@@ -233,11 +234,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 50px;
+            padding: 20px 40px;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             color: #6b7280;
-            font-size: 13px;
-            width: 100%;
+            font-size: 12px;
+            max-width: 950px;
+            margin: 20px auto 0 auto;
         }
 
         .footer-logo {
@@ -248,7 +250,7 @@
         }
 
         .footer-logo img {
-            height: 20px;
+            height: 18px;
             width: auto;
         }
     </style>
@@ -258,7 +260,7 @@
     <!-- Navigációs sáv -->
     <header>
         <a href="#fooldal" class="logo-container">
-            <img src="logo.png" alt="Rathermta Logo"> RATHERMTA.HU
+            <img src="logo.png" alt="Logo"> RATHERMTA.HU
         </a>
         <nav>
             <a href="ucp/index.html">UCP</a>
@@ -276,24 +278,22 @@
         <a href="#segitseg" class="btn">▶ Csatlakozz most</a>
     </section>
 
-    <!-- 2. Segítség / Letöltés Szekció -->
+    <!-- 2. Segítség Szekció -->
     <section id="segitseg">
         <div class="card">
             <div class="help-content">
-                <div style="flex: 1; background: #0f172a; height: 200px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #38bdf8; font-weight: bold;">
+                <div style="flex: 1; background: #0f172a; height: 180px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #38bdf8; font-weight: bold; font-size: 13px;">
                     [ RATHERMTA PREVIEW ]
                 </div>
                 <div class="help-text" style="flex: 1.2;">
                     <h2>Csatlakozás a RATHERMTA szerverére</h2>
-                    <p>Légy részese Magyarország legújabb és legoptimalizáltabb RolePlay közösségének!</p>
+                    <p>Légy részese Magyarország legújabb RolePlay közösségének!</p>
                     <ol>
                         <li>Grand Theft Auto: San Andreas telepítése</li>
                         <li>MTA:SA kliens letöltése</li>
                         <li>MTA:SA kliens indítása</li>
-                        <li>RATHERMTA szócska begépelése a keresőbe</li>
+                        <li>RATHERMTA szócska begépelése</li>
                     </ol>
-                    <p style="color: #4ade80; margin-bottom: 15px;">Kellemes időtöltést kívánunk!</p>
-                    <!-- Automatikus MTA letöltő link hivatalos kliensre -->
                     <a href="https://multitheftauto.com/" class="btn" target="_blank">📥 MTA:SA letöltése</a>
                 </div>
             </div>
@@ -301,41 +301,40 @@
 
         <div class="specs-container">
             <div class="specs-box">
-                <h3>Minimum rendszerkövetelmény</h3>
+                <h3>Minimum követelmény</h3>
                 <ul>
-                    <li>• Operációs rendszer: Windows 10</li>
-                    <li>• CPU: Intel Core 2 Quad / AMD Phenom 9850</li>
+                    <li>• OS: Windows 10</li>
+                    <li>• CPU: Core 2 Quad / Phenom 9850</li>
                     <li>• RAM: 6GB</li>
-                    <li>• Videókártya: NVIDIA 9800 GT / AMD HD 4870</li>
+                    <li>• GPU: NVIDIA 9800 GT / AMD HD 4870</li>
                     <li>• Tárhely: 10GB</li>
                 </ul>
             </div>
             <div class="specs-box">
-                <h3>Ajánlott rendszerkövetelmény</h3>
+                <h3>Ajánlott követelmény</h3>
                 <ul>
-                    <li>• Operációs rendszer: Windows 10/11</li>
-                    <li>• CPU: Intel Core i5 3470 / AMD FX-8350</li>
+                    <li>• OS: Windows 10/11</li>
+                    <li>• CPU: Core i5 3470 / FX-8350</li>
                     <li>• RAM: 12GB</li>
-                    <li>• Videókártya: NVIDIA GTX 660 / AMD HD 7870</li>
+                    <li>• GPU: GTX 660 / HD 7870</li>
                     <li>• Tárhely: 15GB (SSD)</li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <!-- 3. Közösség (Discord) Szekció -->
+    <!-- 3. Közösség Szekció -->
     <section id="kozosseg">
         <div class="card discord-card">
             <div class="discord-text">
                 <h2>Csatlakozz Discord szerverünkre</h2>
-                <p>Légy részese a legaktívabb MTA közösségnek! Kérdezz, beszélgess más játékosokkal, értesülj az eseményekről első kézből.</p>
+                <p>Légy részese a legaktívabb MTA közösségnek! Kérdezz, beszélgess másokkal.</p>
                 <ul class="discord-features">
-                    <li>✓ Közvetlenül tudsz beszélni a vezetőséggel</li>
-                    <li>✓ Eseményekkel és a versenyekkel tisztában leszel</li>
-                    <li>✓ Amennyiben valamit szeretnél jelenteni itt tudod megtenni</li>
+                    <li>✓ Közvetlen beszélgetés a vezetőséggel</li>
+                    <li>✓ Események és versenyek első kézből</li>
+                    <li>✓ Hibák és panaszok jelentése</li>
                 </ul>
             </div>
-            <!-- Discord meghívó link beállítva -->
             <a href="https://discord.gg/7XKZvapgq" class="btn btn-discord" target="_blank">💬 Csatlakozás</a>
         </div>
     </section>
